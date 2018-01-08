@@ -39,7 +39,7 @@ RUN apk --no-cache add python3
 RUN apk --no-cache add curl
 
 # Add user, do not add home
-RUN useradd -m ${NGINX_USER} -G ${NGINX_GROUP} -M -s /usr/sbin/nologin
+RUN useradd -m ${NGINX_USER} -M -s /usr/sbin/nologin
 
 # Add our own config file
 ADD files/etc/nginx.conf /etc/nginx/nginx.conf
@@ -64,7 +64,4 @@ EXPOSE 80
 HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
 
 # If we issue no docker run command
-CMD ["nginx"]
-
-#  Default
-ENTRYPOINT ["-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
