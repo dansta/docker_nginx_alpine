@@ -39,7 +39,7 @@ RUN apk --no-cache add python3
 RUN apk --no-cache add curl
 
 # Add user, do not add home
-RUN useradd ${NGINX_USER} -M -s /usr/sbin/nologin
+#RUN useradd ${NGINX_USER} -M -s /usr/sbin/nologin
 
 # Add our own config file
 ADD files/etc/nginx.conf /etc/nginx/nginx.conf
@@ -52,7 +52,7 @@ RUN /usr/local/bin/replace_conf /etc/nginx/nginx.conf NGINX
 ADD files/etc/mime.types /etc/nginx/conf/mime.types
 
 # Permissions
-RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
+#RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
 
 # Delete packages we dont need after build
 RUN apk delete python3
@@ -61,7 +61,7 @@ RUN apk delete python3
 EXPOSE 80
 
 # Check ourselves to know we are alive
-HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
+#HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
 
 # If we issue no docker run command
 CMD ["nginx", "-g", "daemon off;"]
