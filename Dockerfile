@@ -42,17 +42,17 @@ RUN apk --no-cache add curl
 #RUN useradd ${NGINX_USER} -M -s /usr/sbin/nologin
 
 # Add our own config file
-ADD nginx.conf /etc/nginx/nginx.conf
+ADD files/nginx.conf /etc/nginx/nginx.conf
 # Replace params
-ADD replace.py /usr/local/bin/replace_conf
+ADD files/replace.py /usr/local/bin/replace_conf
 RUN chmod u+x /usr/local/bin/replace_conf
 RUN /usr/local/bin/replace_conf /etc/nginx/nginx.conf NGINX
 
 # Add mime.types
-ADD mime.types /etc/nginx/conf/mime.types
+ADD files/mime.types /etc/nginx/conf/mime.types
 
 # Permissions
-#RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
+RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
 
 # Delete packages we dont need after build
 RUN apk del python3
