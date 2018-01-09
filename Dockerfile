@@ -55,7 +55,7 @@ ADD mime.types /etc/nginx/conf/mime.types
 #RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
 
 # Delete packages we dont need after build
-RUN apk delete python3
+RUN apk del python3
 
 # Document port and autoexpose
 EXPOSE 80
