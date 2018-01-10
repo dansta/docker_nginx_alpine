@@ -17,7 +17,7 @@ try:
         CONFIGFILE.close()
 # strip comments because they are not needed in containers
         CONFIGDATA = re.sub(r'#.*\n',
-                            r'',
+                            r'\n',
                             CONFIGDATA)
 except IOError:
     exit(1)
