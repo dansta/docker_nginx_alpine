@@ -39,7 +39,7 @@ RUN apk --no-cache add python3
 RUN apk --no-cache add curl
 
 # Add user, do not add home
-#RUN useradd ${NGINX_USER} -M -s /usr/sbin/nologin
+RUN useradd ${NGINX_USER} -M -s /usr/sbin/nologin
 
 # Add our own config file
 ADD files/nginx.conf /etc/nginx/nginx.conf
@@ -63,6 +63,9 @@ RUN apk del python3
 
 # Document port and autoexpose
 EXPOSE 80
+
+# Test the config file before launch to avoid zombie containers
+RUN /usr/bin/nginx -t
 
 # Check ourselves to know we are alive
 #HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
