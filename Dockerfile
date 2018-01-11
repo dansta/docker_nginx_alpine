@@ -68,7 +68,7 @@ EXPOSE 80
 RUN /usr/bin/nginx -t
 
 # Check ourselves to know we are alive
-#HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
+HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
 
 # If we issue no docker run command
 CMD ["nginx", "-g", "daemon off;"]
