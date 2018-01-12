@@ -42,8 +42,7 @@ ADD files/nginx.conf /etc/nginx/nginx.conf
 ADD files/mime.types /etc/nginx/conf/mime.types
 # Replace params
 ADD files/replace.py /usr/local/bin/replace_conf
-RUN chmod u+x /usr/local/bin/replace_conf && \
-    /usr/local/bin/replace_conf /etc/nginx/nginx.conf NGINX
+RUN chmod u+x /usr/local/bin/replace_conf && /usr/local/bin/replace_conf /etc/nginx/nginx.conf NGINX
 
 # Permissions
 RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
