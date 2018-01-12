@@ -39,7 +39,7 @@ RUN apk --no-cache add python3
 RUN apk --no-cache add curl
 
 # Add user, do not add home
-RUN adduser ${NGINX_USER} -H -s /usr/sbin/nologin
+RUN adduser ${NGINX_USER} -D -H -s /usr/sbin/nologin
 
 # Add our own config file
 ADD files/nginx.conf /etc/nginx/nginx.conf
