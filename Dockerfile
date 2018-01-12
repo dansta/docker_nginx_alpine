@@ -29,11 +29,8 @@ ENV NGINX_SSL_PROTOCOLS ${NGINX_SSL_PROTOCOLS:-TLSv1 TLSv1.1 TLSv1.2}
 ARG NGINX_SSL_CIPHERS
 ENV NGINX_SSL_CIPHERS ${NGINX_SSL_CIPHERS:-CHACHA20:HIGH:!aNULL:!MD5:!RC4:!DES:!3DES}
 
-# Update cache
-RUN apk update
-
-# Install nginx
-RUN apk --no-cache add nginx \
+# Update cache and install packages
+RUN apk update && apk --no-cache add nginx \
                        python3 \
                        curl
 
