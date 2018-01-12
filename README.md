@@ -10,7 +10,8 @@ Docker image of nginx on alpine for small static content
 - On worker nodes you run the command that swarm init generates
 - Create the service like this 
   ```shell
-  docker service create --name="staticnginx" --publish published=80,target=80 --mount type=volume, \
+  docker service create --name="staticnginx" \
+  --publish published=80,target=80 --mount type=volume, \
   source=/var/lib/docker/dansta_docker_nginx_alpine/var/log, \
   destination=/var/log/ \
   --mount type=volume, \
