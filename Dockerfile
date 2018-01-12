@@ -37,15 +37,13 @@ RUN apk update && apk --no-cache add nginx \
 # Add user, do not add home
 RUN adduser ${NGINX_USER} -D -H -s /usr/sbin/nologin
 
-# Add our own config file
+# Add our own config file and mime types
 ADD files/nginx.conf /etc/nginx/nginx.conf
+ADD files/mime.types /etc/nginx/conf/mime.types
 # Replace params
 ADD files/replace.py /usr/local/bin/replace_conf
-RUN chmod u+x /usr/local/bin/replace_conf
-RUN /usr/local/bin/replace_conf /etc/nginx/nginx.conf NGINX
-
-# Add mime.types
-ADD files/mime.types /etc/nginx/conf/mime.types
+RUN chmod u+x /usr/local/bin/replace_conf && \
+    /usr/local/bin/replace_conf /etc/nginx/nginx.conf NGINX
 
 # Permissions
 RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/
