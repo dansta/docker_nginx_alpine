@@ -9,12 +9,11 @@ ARG https_proxy
 ENV https_proxy ${https_proxy:-localhost:3128}
 ARG all_proxy
 ENV all_proxy ${all_proxy:-localhost:3128}
-
 # Set env. replace right most column with values specific to your environment
 ARG NGINX_USER
-ENV NGINX_USER ${NGINX_USER:-nobody}
+ENV NGINX_USER ${NGINX_USER:-somebodysomeone}
 ARG NGINX_GROUP
-ENV NGINX_GROUP ${NGINX_GROUP:-nobody}
+ENV NGINX_GROUP ${NGINX_GROUP:-somebodysomeone}
 ARG NGINX_WORKER_PROCESSES
 ENV NGINX_WORKER_PROCESSES ${NGINX_WORKER_PROCESSES:-4}
 ARG NGINX_HTTP_PORT
@@ -34,9 +33,9 @@ ENV NGINX_SSL_CIPHERS ${NGINX_SSL_CIPHERS:-CHACHA20:HIGH:!aNULL:!MD5:!RC4:!DES:!
 RUN apk update
 
 # Install nginx
-RUN apk --no-cache add nginx
-RUN apk --no-cache add python3
-RUN apk --no-cache add curl
+RUN apk --no-cache add nginx \
+                       python3 \
+                       curl
 
 # Add user, do not add home
 RUN adduser ${NGINX_USER} -D -H -s /usr/sbin/nologin
