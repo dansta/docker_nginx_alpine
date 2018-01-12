@@ -59,7 +59,7 @@ RUN apk del python3
 EXPOSE 80
 
 # Test the config file before launch to avoid zombie containers
-RUN /usr/sbin/nginx -t
+RUN /usr/sbin/nginx -T
 
 # Check ourselves to know we are alive
 HEALTHCHECK --interval=15s --timeout=3s CMD curl -x 127.0.0.1:80 || exit 1
