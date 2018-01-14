@@ -56,7 +56,8 @@ VOLUME /usr/local/nginx/
 RUN apk del python3
 
 # Document port and autoexpose
-EXPOSE 80
+EXPOSE {NGINX_HTTP_PORT} \
+       {NGINX_HTTPS_PORT}
 
 # Test the config file before launch to avoid zombie containers
 RUN /usr/sbin/nginx -T
